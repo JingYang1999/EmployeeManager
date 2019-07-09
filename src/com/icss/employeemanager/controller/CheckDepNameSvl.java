@@ -9,26 +9,33 @@ import javax.servlet.http.HttpServletResponse;
 import com.icss.employeemanager.biz.DeptBiz;
 
 /**
- * 检查部门名称是否添加过
+ * Servlet implementation class CheckDepNameSvl
  */
 public class CheckDepNameSvl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public CheckDepNameSvl() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//	    1.接收页面传递的参数
-		String depname = request.getParameter("depname");
-//		2.创建biz对象，调用方法，拿到返回值
-		DeptBiz biz = new DeptBiz();
-		boolean result =  biz.checkDepName(depname);   //true:可以注册  false：不可以
-//		3.响应数据
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 1.接收页面传递的参数
+		String depname =request.getParameter("depname");
+		//2.创建业务层对象，调用方法
+		System.out.println(depname);
+		DeptBiz biz= new DeptBiz();
+		boolean result=biz.checkDepName(depname);//true可注册
+		//3.响应数据
 		response.getWriter().print(result);
+		//request.getRequestDispatcher("FindAllDeptSvl").forward(request,response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

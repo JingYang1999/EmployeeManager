@@ -41,6 +41,16 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>aaa</display-name>
+    <servlet-name>aaa</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.aaa</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>aaa</servlet-name>
+    <url-pattern>/aaa</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>CheckDepNameSvl</display-name>
     <servlet-name>CheckDepNameSvl</servlet-name>
     <servlet-class>com.icss.employeemanager.controller.CheckDepNameSvl</servlet-class>

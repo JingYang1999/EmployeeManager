@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 	<title>人事管理系统——添加部门</title>
@@ -22,62 +22,67 @@
 	<script src="${pageContext.request.contextPath}/js/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
 	<link href="${pageContext.request.contextPath}/css/pager.css" type="text/css" rel="stylesheet" />
 	<script type="text/javascript">
-	//提交数据 
-	
-		function submit11() {
-			var name = $("#name");
-			var remark = $("#remark");
-			var msg = "";
-			if ($.trim(name.val()) == "") {
-				msg = "部门名称不能为空！";
-				name.focus();
-			} else if ($.trim(remark.val()) == "") {
-				msg = "详细描述不能为空！";
-				remark.focus();
-			}
-			if (msg != "") {
-				$.ligerDialog.error(msg);
-				//return false;
-			} else {
-				//return true;
-			}
-			
-			$.ajax({
-				type : "post",//发送请求的方式，默认请求方式为get
-				url : "../AddDepSvl", //发送到什么位置
-				data : {"depname":name.val(),"depdetail":remark.val()}, //要传给服务器的参数
-				dataType : "json",//告知此次请求的返回值是json串
-				success : function(data) { //请求成功时调用，data是请求成功时返回的数据
-					//对返回值的操作
-					if (data == true) {
-						alert("部门添加成功");
-					} else {
-						alert("部门添加失败");
-					}
+	 //检查部门名称是否重复
+	 function checkDepName(){
+		 $.ajax({
+			 type:"post",//发送请求方式
+			 url:"../CheckDepNameSvl",//发送到什么位置
+			 data:{"depname":$("#name").val()},//要传给服务器的参数
+			 dataType:"json",//返回类型是json串
+			 success:function(data){//请求成功时调用，data是请求成功是返回数据
+				 //对返回值的操作
+				 alert(data);
+				 if(data==true){
+					 alert("没有注册过此部门");
+				 }else{
+					 alert("此部门已经添加过，无法添加");
+				 }
+			 }
+			 
+		 })
+ 	}
+	 
+	 function submit(){
+	    	/** 部门表单提交 */
+			//$("#deptForm").submit(function(){
+				var name = $("#name");
+				var remark = $("#remark");
+				var msg = "";
+				if ($.trim(name.val()) == ""){
+					msg = "部门名称不能为空！";
+					name.focus();
+				}else if ($.trim(remark.val()) == ""){
+					msg = "详细描述不能为空！";
+					remark.focus();
 				}
-			})
-			
-		}
+				if (msg != ""){
+					$.ligerDialog.error(msg);
+					//return false;
+				}else{
+					//return true;
+				}
+				
+				$.ajax({
+					 type:"post",//发送请求方式
+					 url:"../AddDepSvl",//发送到什么位置
+					 data:{
+						 "depname":name.val(), 
+						 "depdetail":remark.val()
+					 },
+					 dataType:"json",//返回类型是json串
+					 success:function(data){//请求成功时调用，data是请求成功是返回数据
+						 //对返回值的操作
+						 if(data==true){
+							 alert("部门添加成功");
+						 }else{
+							 alert("部门添加失败");
+						 }
+					 }
+					 	 
+				 })
+	    }
+		
 
-		//检查部门名称是否重复
-		function checkDepName() {
-			$.ajax({
-				type : "post",//发送请求的方式，默认请求方式为get
-				url : "../CheckDepNameSvl", //发送到什么位置
-				data : {
-					"depname" : $("#name").val()
-				}, //要传给服务器的参数
-				dataType : "json",//告知此次请求的返回值是json串
-				success : function(data) { //请求成功时调用，data是请求成功时返回的数据
-					//对返回值的操作
-					if (data == true) {
-						alert("没有注册过此部门");
-					} else {
-						alert("此部门已经添加过，无法再添加");
-					}
-				}
-			})
-		}
 	</script>
 </head>
 <body>
@@ -107,7 +112,7 @@
 		    </td></tr>
 			<tr><td class="main_tdbor"></td></tr>
 			
-			<tr><td align="left" class="fftd"><input type="button" onclick="submit11()" value="添加 ">&nbsp;&nbsp;<input type="reset" value="取消 "></td></tr>
+			<tr><td align="left" class="fftd"><input type="button" onclick="submit()" value="添加 ">&nbsp;&nbsp;<input type="reset" value="取消 "></td></tr>
 		  </table>
 		 
 	</td>

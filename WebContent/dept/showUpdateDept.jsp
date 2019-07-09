@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 	<title>人事管理系统——修改部门</title>
@@ -39,10 +40,9 @@
 					$.ligerDialog.error(msg);
 					return false;
 				}else{
-					$("#deptForm").submit();  //js提交表单的方法
 					return true;
 				}
-				
+				//$("#deptForm").submit();
 			//});
 	    }
 		
@@ -61,10 +61,10 @@
 <table width="100%" height="90%" border="0" cellpadding="5" cellspacing="0" class="main_tabbor">
   <tr valign="top">
     <td>
-    	 <form  action="${pageContext.request.contextPath}/UpdateDepSvl" method="post">
+    	 	<form action="${pageContext.request.contextPath}/UpdateDepSvl" method="post">
     	 	<!-- 隐藏表单，flag表示添加标记 -->
     	 	<input type="hidden" name="flag" value="2">
-    	 	<input type="hidden"  name="id" value="${param.depid}">
+    	 	<input type="hidden" name="id" value="${param.depid}">
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr><td class="font3 fftd">
 		    	<table>

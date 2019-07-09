@@ -52,27 +52,24 @@
 	 			   var ids = checkedBoxs.map(function(){
 	 				   return this.value;
 	 			   })
+	 			   //alert(id.get());
 	 			   $.ligerDialog.confirm("确认要删除吗?","删除部门",function(r){
 	 				   if(r){
 	 					   // alert("删除："+ids.get());
 	 					   // 发送请求
-	 					  window.location.href="DelDepSvl?ids="+ids.get();
+	 					   window.location.href = "DelDepSvl?ids=" + ids.get();
 	 				   }
 	 			   });
 	 		   }
 	 	   })
 	    })
-	    
-	    //跳转到第n页
-	    function gotoPage(totalPage) {
-			var num = $("#pager_jump_page_size").val();
-			//1.num要大于0   2.num 小于总页数  
+	    function gotoPage(totalPage){
+			var num=$("#pager_jump_page_size").val();
 			if(num>0 && num<=totalPage){
-				window.location.href="FindAllDeptSvl?current="+num;  //发送请求
+				window.location.href="FindAllDeptSvl?current="+num;
 			}else{
-				alert("跳转的页数只能是1-"+totalPage+"之间");	
+				alert("跳转页数只能是1-"+totalPage+"之间");
 			}
-			
 		}
 	</script>
 </head>
@@ -149,27 +146,21 @@
 							<td
 								style="COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; TEXT-DECORATION: none">
 								
-								
 								<c:if test="${pageinfo.currentPage ne 1}">
 								<span class="disabled">
-								<a href="FindAllDeptSvl?current=${pageinfo.currentPage-1}">上一页</a>
-								</span>
+								<a href="FindAllDeptSvl?current=${pageinfo.currentPage-1}">上一页</a></span>
 								</c:if>
 								
 								
-								<!-- <span class="current">1</span><a
-								href="#">2</a> -->
-								
-								<c:if test="${pageinfo.currentPage != pageinfo.totalPage}">
+								<c:if test="${pageinfo.currentPage != pageinfo.totalPage }">
 								<a href="FindAllDeptSvl?current=${pageinfo.currentPage+1}">下一页</a>
-								</c:if>
-								
-								&nbsp;跳转到&nbsp;&nbsp;
-								<input style="text-align: center; BORDER-RIGHT: #aaaadd 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #aaaadd 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #aaaadd 1px solid; COLOR: #000099; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaadd 1px solid; TEXT-DECORATION: none"
-								type="text" size="2" id="pager_jump_page_size" >&nbsp;<input
+								</c:if>&nbsp;跳转到&nbsp;&nbsp;
+								<input
+								style="text-align: center; BORDER-RIGHT: #aaaadd 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #aaaadd 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #aaaadd 1px solid; COLOR: #000099; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaadd 1px solid; TEXT-DECORATION: none"
+								type="text" size="2" id="pager_jump_page_size">&nbsp;<input
 								type="button"
 								style="text-align: center; BORDER-RIGHT: #dedfde 1px solid; PADDING-RIGHT: 6px; BACKGROUND-POSITION: 50% bottom; BORDER-TOP: #dedfde 1px solid; PADDING-LEFT: 6px; PADDING-BOTTOM: 2px; BORDER-LEFT: #dedfde 1px solid; COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; BORDER-BOTTOM: #dedfde 1px solid; TEXT-DECORATION: none"
-						value="确定" id="pager_jump_btn" onclick="gotoPage(${pageinfo.totalPage})"></td>
+								value="确定" id="pager_jump_btn" onclick="gotoPage(${pageinfo.totalPage})"></td>
 						</tr>
 						<tr align="center">
 							<td style="font-size: 13px;"></td>

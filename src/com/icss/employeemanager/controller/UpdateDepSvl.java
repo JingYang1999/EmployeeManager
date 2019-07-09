@@ -1,6 +1,8 @@
 package com.icss.employeemanager.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,30 +11,45 @@ import javax.servlet.http.HttpServletResponse;
 import com.icss.employeemanager.biz.DeptBiz;
 
 /**
- * 修改部门
+ * Servlet implementation class UpdateDepSvl
  */
 public class UpdateDepSvl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
     public UpdateDepSvl() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	   request.setCharacterEncoding("utf-8");  //post生效，修改编码格式
-	   //1.接收参数
-	   String depid = request.getParameter("id");
-	   String depname = request.getParameter("name");
-	   String depdetail = request.getParameter("remark");
-//	   2.创建业务层对象，调用方法
-	   DeptBiz biz = new DeptBiz();
-	   biz.updateDep(depid,depname,depdetail);
-//     3.请求转发到FindAllDepSvl
-	   request.getRequestDispatcher("FindAllDeptSvl").forward(request, response);
-	   
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
+		String depid=request.getParameter("id");
+		String depname=request.getParameter("name");
+		String depdetail=request.getParameter("remark");
+		//System.out.println(depid+" "+depname+" ");
+		DeptBiz biz= new DeptBiz();
+		try {
+			biz.updateDep(depid,depname,depdetail);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("FindAllDeptSvl").forward(request,response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

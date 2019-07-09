@@ -15,16 +15,13 @@ public class BaseDao {
 	// ������
 	public void openConnection() throws Exception {
 		// ֻ��Connection����Ϊnull���߱��رյ�����Ŵ�������
-		if (conn == null || conn.isClosed()) {
+		Class.forName("com.mysql.cj.jdbc.Driver");
 
-			Class.forName("com.mysql.cj.jdbc.Driver");
-
-			String url = "jdbc:mysql://localhost:3306/m_empl_db?serverTimezone=GMT%2B8";
-			String username = "root"; 
-			String password = "jingyang";
-			conn = DriverManager.getConnection(url, username, password);
-			System.out.println(conn.toString());
-		}
+		String url = "jdbc:mysql://localhost:3306/m_empl_db?serverTimezone=GMT%2B8";
+		String username = "root"; 
+		String password = "jingyang";
+		conn = DriverManager.getConnection(url, username, password);
+		System.out.println(conn.toString());
 	}
 	//�ر�����
 	public void closeConnection(){
