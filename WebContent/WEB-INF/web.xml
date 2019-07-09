@@ -31,26 +31,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>FindAllJobSvl</display-name>
-    <servlet-name>FindAllJobSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindAllJobSvl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FindAllJobSvl</servlet-name>
-    <url-pattern>/FindAllJobSvl</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>FindAllEmpSvl</display-name>
-    <servlet-name>FindAllEmpSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindAllEmpSvl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FindAllEmpSvl</servlet-name>
-    <url-pattern>/FindAllEmpSvl</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>DelDepSvl</display-name>
     <servlet-name>DelDepSvl</servlet-name>
     <servlet-class>com.icss.employeemanager.controller.DelDepSvl</servlet-class>
@@ -58,5 +38,35 @@
   <servlet-mapping>
     <servlet-name>DelDepSvl</servlet-name>
     <url-pattern>/DelDepSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckDepNameSvl</display-name>
+    <servlet-name>CheckDepNameSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.CheckDepNameSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckDepNameSvl</servlet-name>
+    <url-pattern>/CheckDepNameSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddDepSvl</display-name>
+    <servlet-name>AddDepSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.AddDepSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDepSvl</servlet-name>
+    <url-pattern>/AddDepSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateDepSvl</display-name>
+    <servlet-name>UpdateDepSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.UpdateDepSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateDepSvl</servlet-name>
+    <url-pattern>/UpdateDepSvl</url-pattern>
   </servlet-mapping>
 </web-app>

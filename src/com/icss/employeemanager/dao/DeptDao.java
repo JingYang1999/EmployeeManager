@@ -6,59 +6,133 @@ import java.util.ArrayList;
 
 import com.icss.employeemanager.entity.DeptEntity;
 
-public class DeptDao extends BaseDao {
+/**
+*²¿ÃÅµÄÊı¾İ²ã²Ù×÷
+*@author Giselle
+*/
+public class DeptDao extends BaseDao{
+    
+	//·ÖÒ³²éÑ¯ËùÓĞ²¿ÃÅĞÅÏ¢
 	public ArrayList<DeptEntity> findAllDept(int pageSize, int firstCount) throws Exception {
+		//1.2 ´ò¿ªÁ¬½Ó
 		openConnection();
+		//3.Ğ´sql
 		String sql = "select * from t_dep limit ?,?";
+		//4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.setInt(1, firstCount);
 		pst.setInt(2, pageSize);
-		ResultSet rs = pst.executeQuery();
-		ArrayList<DeptEntity> deps = new ArrayList<DeptEntity>();
-		DeptEntity dep = null;
-		while (rs.next()) {
-			dep = new DeptEntity();
-			dep.setDepid(rs.getInt(1));
-			dep.setDepname(rs.getString(2));
-			dep.setDepdetail(rs.getString(3));
-			deps.add(dep);
-		}
+		//5.Ö´ĞĞsql  ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯   ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
+		 ResultSet rs = pst.executeQuery();
+		//6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯  1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ   2.next() 3.getXX
+		 ArrayList<DeptEntity> deps = new ArrayList<DeptEntity>();
+		 DeptEntity dep = null;
+		 while(rs.next()){
+			 dep = new DeptEntity();
+			 dep.setDepid(rs.getInt(1));
+			 dep.setDepname(rs.getString(2));
+			 dep.setDepdetail(rs.getString(3));
+			 deps.add(dep);
+		 }
 		return deps;
 	}
-
+    
+	//»ñÈ¡²¿ÃÅ×ÜÊı
 	public int getDeptCount() throws Exception {
+		// 1.2 ´ò¿ªÁ¬½Ó
 		openConnection();
+		// 3.Ğ´sql
 		String sql = "select count(*) from t_dep";
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
+		// 5.Ö´ĞĞsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
 		ResultSet rs = pst.executeQuery();
+		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ 2.next() 3.getXX
 		int count = 0;
-		while (rs.next()) {
+		while(rs.next()){
 			count = rs.getInt(1);
 		}
 		return count;
 	}
-	
-	//åˆ é™¤éƒ¨é—¨
+     
+	//É¾³ı²¿ÃÅ
 	public void delDep(String[] ids) throws Exception {
-		// 1.2 æ‰“å¼€è¿æ¥
+		// 1.2 ´ò¿ªÁ¬½Ó
 		openConnection();
-		// 3.å†™sql
-		String wherein="where depid in(";
-		for (int i=0;i<ids.length;i++) {
-			if(i==ids.length-1) {
-				wherein+=ids[i];
+		// 3.Ğ´sql  in (1,2,)
+		String wherein = "where depid in(";
+		for (int i = 0; i < ids.length; i++) {
+			if (i==ids.length-1) {
+				wherein += ids[i];
 			}else {
-				wherein+=ids[i]+",";
+				wherein += ids[i]+",";
 			}
-			wherein+=")";
 		}
+		wherein+=")";
 		String sql = "delete from t_dep "+wherein;
-		// 4.åˆ›å»ºé¢„ç¼–è¯‘å¯¹è±¡
+		System.out.println(sql);
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
-		// 5.æ‰§è¡Œsql æŸ¥è¯¢ï¼šexecuteQuery-è¿”å›resultsetç»“æœé›† å¢åˆ æ”¹ï¼šexecuteUpdate--è¿”å›å—å½±å“è¡Œæ•°
-		//ResultSet rs = pst.executeQuery();
+		// 5.Ö´ĞĞsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
 		pst.executeUpdate();
-		// 6.å¦‚æœæŸ¥è¯¢å¤„ç†resultsetç»“æœé›† 1.é€‰æ‹©ä»€ä¹ˆç±»å‹æ¥æ”¶æ•°æ® 2.next() 3.getXX
+		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ 2.next() 3.getXX
 	}
-	
+
+	//ÊÇ·ñÌí¼Ó¹ı´Ë²¿ÃÅ
+	public boolean checkDepName(String depname) throws Exception {
+		// 1.2 ´ò¿ªÁ¬½Ó
+		openConnection();
+		// 3.Ğ´sql
+		String sql = "select * from t_dep where depname=?";
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setString(1, depname);
+		// 5.Ö´ĞĞsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
+		ResultSet rs = pst.executeQuery();
+		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ 2.next() 3.getXX
+		int depid = 0;
+		while (rs.next()) {
+			depid = rs.getInt(1);
+		}
+        boolean result = false;  //ÊÇ·ñ¿ÉÒÔ×¢²áµÄ±êÊ¶·û
+		if (depid==0) {  //Èç¹ûÓĞid¾ÍÖ¤Ã÷Êı¾İ¿âÖĞ´æÔÚ´ËÃû³Æ£¬·´Ö®£¬¿ÉÒÔ×¢²á
+			result = true; 
+		}
+		
+		return result;
+	}
+    
+	//Ìí¼Ó²¿ÃÅ
+	public int insertDep(String depname, String depdetail) throws Exception {
+		// 1.2 ´ò¿ªÁ¬½Ó
+		openConnection();
+		// 3.Ğ´sql 
+		String sql = "insert into t_dep(depname,depdetail) values(?,?)";
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setString(1, depname);
+		pst.setString(2, depdetail);
+		// 5.Ö´ĞĞsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
+		int res = pst.executeUpdate();
+		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ 2.next() 3.getXX
+		return res;
+	}
+    
+	//ĞŞ¸Ä²¿ÃÅ
+	public void updateDep(String depid, String depname, String depdetail) throws Exception {
+		// 1.2 ´ò¿ªÁ¬½Ó
+		openConnection();
+		// 3.Ğ´sql
+		String sql = "update t_dep set depname=?,depdetail=? where depid =?";
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setString(1, depname);
+		pst.setString(2, depdetail);
+		pst.setInt(3, Integer.parseInt(depid));
+		// 5.Ö´ĞĞsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìĞĞÊı
+		pst.executeUpdate();
+		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàĞÍ½ÓÊÕÊı¾İ 2.next() 3.getXX
+
+	}
+
 }

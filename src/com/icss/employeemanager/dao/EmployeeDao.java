@@ -9,54 +9,53 @@ import java.util.Date;
 import com.icss.employeemanager.entity.EmployeeEntity;
 
 /**
- * ï¿½ï¿½ï¿½Ý²ã£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿â£¬ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ØµÄ²ï¿½ï¿½ï¿½
+ * Êý¾Ý²ã£º²Ù×÷Êý¾Ý¿â£¬ËùÓÐÔ±¹¤Ïà¹ØµÄ²Ù×÷
  * 
  * @author Giselle
  */
 public class EmployeeDao extends BaseDao {
-	// ï¿½ï¿½Â¼
+	// µÇÂ¼
 	/*
-	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð·ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ Ã»ï¿½ï¿½--void
-	 * 2ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½Ð©ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½Î²ï¿½ Ã»ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½
+	 * ·½·¨Á½¸öÒªËØ
+	 * 1¡¢·½·¨ÓÐÃ»ÓÐ·µ»ØÖµ£ºÓÐ--¾ÍÐ´·µ»ØÖµÀàÐÍ   Ã»ÓÐ--void
+	 * 2¡¢ÓÐÃ»ÓÐ²ÎÊý£ºÓÐ--ÓÐÄÄÐ©²ÎÊý¾ÍÐ´ÐÎ²Î   Ã»ÓÐ--£¨£©
 	 * 
 	 */
 	public EmployeeEntity login(String empname, String password) throws Exception {
-		// 1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//1.2 ´ò¿ªÁ¬½Ó
 		openConnection();
-		// 3.Ð´sqlï¿½ï¿½ï¿½
+		//3.Ð´sqlÓï¾ä
 		String sql = "select * from t_employee where empname=? and password=? and status=?";
-		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
-		// ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½Ð£ï¿½ï¿½Í¿ï¿½ï¿½ï¿½Ö´ï¿½ï¿½sqlï¿½ï¿½
-		pst.setString(1, empname); // setXXï¿½ï¿½?ï¿½ï¿½Ë³ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½--ÒªÆ´ï¿½ï¿½sqlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ xxï¿½ï¿½ï¿½ï¿½ï¿½ÐºÍ±ï¿½ï¿½ï¿½ÒªÒ»ï¿½ï¿½
+		//Èç¹ûÓÐ£¿¾ÍÆ´²ÎÊý£»Èç¹ûÃ»ÓÐ£¬¾Í¿ÉÒÔÖ´ÐÐsqlÁË
+		pst.setString(1, empname);  //setXX£¨?µÄË³Ðò,±äÁ¿--ÒªÆ´ÔÚsqlÓï¾äÀïÃæµÄÖµ£© xxµÄÀàÐÐºÍ±äÁ¿ÒªÒ»ÖÂ
 		pst.setString(2, password);
 		pst.setString(3, "1");
-
-		// 5.Ñ¡ï¿½ï¿½Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ ï¿½ï¿½É¾ï¿½Ä£ï¿½executeupdateï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ñ¯ï¿½ï¿½
-		// executeQueryï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		
+		//5.Ñ¡ÔñÖ´ÐÐsqlÓï¾äµÄ·½·¨   ÔöÉ¾¸Ä£ºexecuteupdate·µ»ØµÄÊÇÊÜÓ°ÏìµÄÐÐÊý   ²éÑ¯£º executeQuery£¬·µ»ØÒ»¸ö½á¹û¼¯  
 		ResultSet rs = pst.executeQuery();
-		System.out.println("dao.rs:" + rs);
-		// 6.ï¿½ï¿½ï¿½ï¿½Ç²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½1ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ next()ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+		
+		//6.Èç¹ûÊÇ²éÑ¯¾ÍÐèÒª´¦Àí½á¹û¼¯ £¨1£©Ñ¡ÔñÈÝÆ÷ £¨2£©±éÀú next()£ºÒÆ¶¯µ½ÏÂÒ»ÐÐ
 		EmployeeEntity emp = null;
-		while (rs.next()) {
-			emp = new EmployeeEntity();
-			System.out.println("dao.emp:" + emp);
-			emp.setEmpId(rs.getInt("empid"));// getXX(ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶Îµï¿½Ë³ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½1.xxï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶Îµï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
-			emp.setEmpname(rs.getString("empname"));
-			emp.setPassword(rs.getString("password"));
-			emp.setRole(rs.getString("role"));
-
+		while(rs.next()){
+		   emp = new EmployeeEntity();
+		   emp.setEmpId(rs.getInt("empid"));//getXX(Ë÷Òý--±íÀï×Ö¶ÎµÄË³Ðò/±íÀïµÄ×Ö¶ÎÃû)»ñµÃÔÚÊý¾Ý¿âÀïµÄÖµ£º1.xxµÄÀàÐÍºÍÊý¾Ý¿âÀï´Ë×Ö¶ÎµÄÀàÐÍÒ»ÖÂ
+		   emp.setEmpname(rs.getString("empname"));
+		   emp.setPassword(rs.getString("password"));
+		   emp.setRole(rs.getString("role"));
+				   
 		}
 		return emp;
 	}
-
-	// ï¿½ï¿½ï¿½Ô±ï¿½ï¿½
-	public int addEmployee(EmployeeEntity emp) throws Exception {
-		// 1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	
+	// Ìí¼ÓÔ±¹¤
+	public int addEmployee(EmployeeEntity emp) throws Exception{
+		//1.2 ´ò¿ªÁ¬½Ó
 		openConnection();
-		// 3.Ð´sql
+		//3.Ð´sql
 		String sql = "insert into t_employee(depid,jobid,empname,cardnumber,sex,education,email,phone,tel,party,qq,address,postcode,birthday,race,speciality,hobby,remark,createtime,password,role,status)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.setInt(1, emp.getDepId());
 		pst.setInt(2, emp.getJobId());
@@ -76,102 +75,78 @@ public class EmployeeDao extends BaseDao {
 		pst.setString(16, emp.getSpeciality());
 		pst.setString(17, emp.getHobby());
 		pst.setString(18, emp.getRemark());
-		pst.setTimestamp(19, new Timestamp(new Date().getTime()));
+		pst.setTimestamp(19,new Timestamp(new Date().getTime()));
 		pst.setString(20, emp.getPassword());
 		pst.setString(21, emp.getRole());
 		pst.setString(22, emp.getStatus());
-		// 5.Ö´ï¿½ï¿½sqlï¿½ï¿½ï¿½ ï¿½ï¿½É¾ï¿½Ä£ï¿½executeupdate--ï¿½ï¿½ï¿½ï¿½intï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ñ¯ï¿½ï¿½executequery--ï¿½ï¿½ï¿½ï¿½resultset
-		int res = pst.executeUpdate();
-		// 6.ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Òª Ö»ï¿½Ð²ï¿½Ñ¯ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		//5.Ö´ÐÐsqlÓï¾ä   ÔöÉ¾¸Ä£ºexecuteupdate--·µ»ØintÀàÐÍ   ²éÑ¯£ºexecutequery--·µ»Øresultset
+		int res =  pst.executeUpdate();
+		//6.ÐèÒª´¦Àí½á¹û¼¯Âð £¿ ²»ÐèÒª  Ö»ÓÐ²éÑ¯ÐèÒª´¦Àí½á¹û¼¯
 		return res;
-	}
-
-	// ï¿½é¿´ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½
-//	public ArrayList<EmployeeEntity> findAllEmp() throws Exception {
-//		openConnection();
-//		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and status=?";
-//		PreparedStatement pst = conn.prepareStatement(sql);
-//		pst.setString(1, "1");
-//		ResultSet rs = pst.executeQuery();
-//		ArrayList<EmployeeEntity> list = new ArrayList<EmployeeEntity>();// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
-//		EmployeeEntity emp = null;
-//		while (rs.next()) {
-//			emp = new EmployeeEntity();
-//			emp.setEmpId(rs.getInt("empid"));
-//			emp.setEmpname(rs.getString("empname"));
-//			emp.setJobname(rs.getString("jobname"));
-//			emp.setDepname(rs.getString("depname"));
-//			emp.setAddress(rs.getString("address"));
-//			emp.setEducation(rs.getString("education"));
-//			emp.setCreateTime(rs.getTimestamp("createtime"));
-//			emp.setEmail(rs.getString("email"));
-//			emp.setCardunmber(rs.getString("cardnumber"));
-//			emp.setPhone(rs.getString("phone"));
-//			emp.setSex(rs.getString("sex"));
-//			emp.setStatus(rs.getString("status"));
-//			list.add(emp);
-//		}
-//		return list;
-//	}
-
+	} 
 	
-	public ArrayList<EmployeeEntity> findAllEmp(int pageSize, int firstCount) throws Exception {
+	// ²é¿´ËùÓÐÔ±¹¤
+	public ArrayList<EmployeeEntity> findAllEmp() throws Exception{
+		//1.2´ò¿ªÁ¬½Ó
 		openConnection();
-		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and status=? limit ?,?";
+		//3.Ð´sql
+		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and status=?";
+		//4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.setString(1, "1");
-		pst.setInt(2, firstCount);
-		pst.setInt(3, pageSize);
+		//5.Ö´ÐÐsql  executequery
 		ResultSet rs = pst.executeQuery();
-		ArrayList<EmployeeEntity> emps=new ArrayList<EmployeeEntity>();	
+		//6.´¦Àí½á¹û¼¯  1.Ñ¡ÔñÓÃÊ²Ã´À´½ÓÊÕ²ÎÊý  next  getXX
+		ArrayList<EmployeeEntity> list = new ArrayList<EmployeeEntity>();//´´½¨¼¯ºÏ¶ÔÏó
 		EmployeeEntity emp = null;
-		while (rs.next()) {
+		while(rs.next()){ //±éÀú
 			emp = new EmployeeEntity();
-			emp.setEmpId(rs.getInt("empid"));
+			emp.setEmpId(rs.getInt("empid"));//getXX£¨Ë÷Òý--±íÀï×Ö¶ÎµÄË³Ðò»òÕßÊý¾Ý±íÀïµÄ×Ö¶ÎÃû»ñµÃÔÚÊý¾Ý¿âÀïµÄÖµ£º1.£©
 			emp.setEmpname(rs.getString("empname"));
 			emp.setJobname(rs.getString("jobname"));
 			emp.setDepname(rs.getString("depname"));
-			emp.setAddress(rs.getString("address"));
+		    emp.setAddress(rs.getString("address"));
 			emp.setEducation(rs.getString("education"));
-			emp.setCreateTime(rs.getTimestamp("createtime"));
+		    emp.setCreateTime(rs.getTimestamp("createtime"));
 			emp.setEmail(rs.getString("email"));
 			emp.setCardunmber(rs.getString("cardnumber"));
 			emp.setPhone(rs.getString("phone"));
 			emp.setSex(rs.getString("sex"));
 			emp.setStatus(rs.getString("status"));
-			emps.add(emp);
+			list.add(emp);  //°Ñ´´½¨ºÃµÄ¶ÔÏó´æ·Åµ½¼¯ºÏÖÐ
 		}
-		return emps;
+		return list;
+		
 	}
 	
-	// ï¿½é¿´Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½idï¿½é¿´Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+	// ²é¿´Ô±¹¤ÏêÇé(¸ù¾ÝÔ±¹¤id²é¿´Ô±¹¤ÏêÇé)
 	public EmployeeEntity findEmpDetail(int empid) throws Exception {
-		// 1.2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// 1.2´ò¿ªÁ¬½Ó
 		openConnection();
 		// 3.Ð´sql
 		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and e.empid=?";
-		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
-		pst.setInt(1, empid);
-		// 5.Ö´ï¿½ï¿½sql executequery
+		pst.setInt(1,empid);
+		// 5.Ö´ÐÐsql executequery
 		ResultSet rs = pst.executeQuery();
-		// 6.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1.Ñ¡ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ next getXX
-		EmployeeEntity emp = null;
-		while (rs.next()) {
+		// 6.´¦Àí½á¹û¼¯ 1.Ñ¡ÔñÓÃÊ²Ã´À´½ÓÊÕ²ÎÊý next getXX
+		EmployeeEntity emp=null;
+		while(rs.next()){
 			emp = new EmployeeEntity();
-			emp.setEmpId(rs.getInt("empid"));// getXXï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶Îµï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý±ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½1.ï¿½ï¿½
+			emp.setEmpId(rs.getInt("empid"));//getXX£¨Ë÷Òý--±íÀï×Ö¶ÎµÄË³Ðò»òÕßÊý¾Ý±íÀïµÄ×Ö¶ÎÃû»ñµÃÔÚÊý¾Ý¿âÀïµÄÖµ£º1.£©
 			emp.setEmpname(rs.getString("empname"));
 			emp.setRole(rs.getString("role"));
 			emp.setJobname(rs.getString("jobname"));
 			emp.setDepname(rs.getString("depname"));
 			emp.setPassword(rs.getString("password"));
-			emp.setAddress(rs.getString("address"));
-			emp.setBirthday(rs.getTimestamp("birthday"));
+		    emp.setAddress(rs.getString("address"));
+		    emp.setBirthday(rs.getTimestamp("birthday"));
 			emp.setEducation(rs.getString("education"));
-			emp.setCreateTime(rs.getTimestamp("createtime"));
+		    emp.setCreateTime(rs.getTimestamp("createtime"));
 			emp.setEmail(rs.getString("email"));
-			emp.setFaceUrl(rs.getString("facepath"));
-			emp.setFacePath(rs.getString("faceurl"));
+		    emp.setFaceUrl(rs.getString("facepath"));
+		    emp.setFacePath(rs.getString("faceurl")); 
 			emp.setTel(rs.getString("tel"));
 			emp.setPostcode(rs.getString("postcode"));
 			emp.setCardunmber(rs.getString("cardnumber"));
@@ -185,26 +160,26 @@ public class EmployeeDao extends BaseDao {
 			emp.setRemark(rs.getString("remark"));
 			emp.setHobby(rs.getString("hobby"));
 		}
-
+		
 		return emp;
 
 	}
-
-	// ï¿½ï¿½È¡Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	
+	// »ñÈ¡Ô±¹¤ÊýÁ¿
 	public int getEmpCount() throws Exception {
-		// 1.2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// 1.2´ò¿ªÁ¬½Ó
 		openConnection();
 		// 3.Ð´sql
 		String sql = "select count(*) from t_employee where status=?";
-		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// 4.´´½¨Ô¤±àÒë¶ÔÏó
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.setString(1, "1");
-		// 5.Ö´ï¿½ï¿½sql executequery
+		// 5.Ö´ÐÐsql executequery
 		ResultSet rs = pst.executeQuery();
-		// 6.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1.Ñ¡ï¿½ï¿½ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½ï¿½ï¿½Õ²ï¿½ï¿½ï¿½ next getXX
-		int res = 0;
-		while (rs.next()) {
-			res = rs.getInt(1);
+		// 6.´¦Àí½á¹û¼¯ 1.Ñ¡ÔñÓÃÊ²Ã´À´½ÓÊÕ²ÎÊý next getXX
+		int res=0;
+		while(rs.next()){
+			res=rs.getInt(1);
 		}
 		return res;
 	}

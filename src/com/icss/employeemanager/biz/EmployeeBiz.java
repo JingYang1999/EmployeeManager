@@ -4,77 +4,60 @@ import java.util.ArrayList;
 
 import com.icss.employeemanager.dao.EmployeeDao;
 import com.icss.employeemanager.entity.EmployeeEntity;
-import com.icss.employeemanager.utils.ResultPage;
 
-
+/**
+ * ÒµÎñ²ã£ºËùÓÐºÍÔ±¹¤Ïà¹ØµÄÒµÎñÂß¼­´¦Àí---µ÷ÓÃÊý¾Ý²ã½øÐÐÒµÎñ´¦Àí
+ * 
+ * @author Giselle
+ */
 public class EmployeeBiz {
-	EmployeeDao dao = new EmployeeDao(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½
-
-	// ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½
+	EmployeeDao dao = new EmployeeDao(); // ´´½¨Êý¾Ý²ã¶ÔÏó
+	
+	// µÇÂ¼¹¦ÄÜ
 	public EmployeeEntity login(String empname, String password) {
 		EmployeeEntity emp = null;
 		try {
 			emp = dao.login(empname, password);
-			System.out.println("biz:"+emp);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally { // ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½finallyï¿½ï¿½
-			dao.closeConnection(); // ï¿½Ø±ï¿½ï¿½ï¿½Ô´
+		} finally { // ÎÞÂÛÊÇ·ñÓÐÒì³££¬¶¼»áÖ´ÐÐfinally¿é
+			dao.closeConnection(); // ¹Ø±Õ×ÊÔ´
 		}
 		return emp;
 	}
-
-	// ï¿½ï¿½ï¿½Ô±ï¿½ï¿½
-	public int addEmployee(EmployeeEntity emp) {
-		int res = 0;
+	// Ìí¼ÓÔ±¹¤
+	public int addEmployee(EmployeeEntity emp){
+		int res=0;
 		try {
 			res = dao.addEmployee(emp);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}finally{
 			dao.closeConnection();
 		}
 		return res;
 	}
-
-
-//	public ArrayList<EmployeeEntity> findAllEmp() {
-//		ArrayList<EmployeeEntity> emplist = null;
-//		try {
-//			emplist = dao.findAllEmp();
-////			int res = dao.getEmpCount(); 
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			dao.closeConnection();
-//		}
-//		return emplist;
-//	}
-
-	public void findAllEmp(ResultPage<EmployeeEntity> pageInfo) {
+	// ²é¿´ËùÓÐÔ±¹¤ÐÅÏ¢
+	public ArrayList<EmployeeEntity> findAllEmp(){
+		ArrayList<EmployeeEntity> emplist = null;
 		try {
-			int pageSize = 10;
-			int firstCount = (pageInfo.getCurrentPage() - 1) * pageSize;
-			ArrayList<EmployeeEntity> emps = dao.findAllEmp(pageSize, firstCount);
-			pageInfo.setLists(emps);
-			int totalCount = dao.getEmpCount();
-			pageInfo.setTotalCount(totalCount);
-			int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
-			pageInfo.setTotalPage(totalPage);
+			emplist = dao.findAllEmp();
+//			int res = dao.getEmpCount(); 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}finally{
 			dao.closeConnection();
 		}
+		return emplist;
 	}
-
-	public EmployeeEntity findEmpDetail(int empid) {
+	// ²é¿´Ô±¹¤ÏêÇé
+	public EmployeeEntity findEmpDetail(int empid){
 		EmployeeEntity emp = null;
 		try {
 			emp = dao.findEmpDetail(empid);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}finally {
 			dao.closeConnection();
 		}
 		return emp;

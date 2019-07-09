@@ -21,35 +21,33 @@ public class LoginSvl extends HttpServlet {
     }
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    //1.ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
-		String empname = request.getParameter("loginname");  //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½inputï¿½ï¿½nameï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+	    //1.½ÓÊÕÒ³ÃæµÄ²ÎÊı
+		String empname = request.getParameter("loginname");  //»ñÈ¡ÊäÈë¿òÊäÈëµÄÄÚÈİ£¬²ÎÊıºÍinputµÄnameµÄÊôĞÔÖµ±ØĞëÒ»ÖÂ
 	    String password = request.getParameter("password");
-	    
-	    System.out.println(empname+"+"+password);
         
-	    //2.ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ó£¬µï¿½ï¿½Ãµï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Öµ
-	    EmployeeBiz biz = new EmployeeBiz();//ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	    //2.´´½¨ÒµÎñÂß¼­²ãµÄ¶ÔÏó£¬µ÷ÓÃµÇÂ¼·½·¨£¬ÄÃµ½·µ»ØÖµ
+	    EmployeeBiz biz = new EmployeeBiz();//´´½¨ÒµÎñ²ã¶ÔÏó
 	    EmployeeEntity emp = biz.login(empname, password);  
 	    
-	    //3.ï¿½ï¿½ï¿½ï¿½ï¿½İ±ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½
-	    //ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªnullï¿½Çµï¿½Â¼Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½Ğ¶Ï½ï¿½É«ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Í¬Ò³ï¿½ï¿½
+	    //3.°ÑÊı¾İ±£´æµ½Óò¶ÔÏó
+	    //Èç¹ûµÃµ½µÄÊı¾İÎªnullÊÇµÇÂ¼Ê§°Ü£¬·µ»Øµ½µÇÈëÒ³Ãæ£¬²¢·µ»Ø´íÎóĞÅÏ¢£»Èç¹û²»Îª¿ÕÅĞ¶Ï½ÇÉ«Ìø×ªµ½²»Í¬Ò³Ãæ
 	    String url = "";
 	    if (emp==null) {
-	    	request.setAttribute("msg", "æ‰¾ä¸åˆ°");  //ï¿½ï¿½ï¿½ï¿½ï¿½İ±ï¿½ï¿½æµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-	    	url="loginForm.jsp";  //ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½Ô´
+	    	request.setAttribute("msg", "Ô±¹¤ĞÕÃû»òÕßÃÜÂë´íÎó");  //°ÑÊı¾İ±£´æµ½ÇëÇóÓò
+	    	url="loginForm.jsp";  //ÇëÇó×ª·¢µÄÄ¿±ê×ÊÔ´
 		}else {
-			HttpSession session = request.getSession();//ï¿½ï¿½ï¿½sessionï¿½ï¿½ï¿½ï¿½
-			session.setAttribute("empid", emp.getEmpId()); //ï¿½ï¿½ï¿½ï¿½ï¿½İ±ï¿½ï¿½æµ½ï¿½á»°ï¿½ï¿½
+			HttpSession session = request.getSession();//»ñµÃsession¶ÔÏó
+			session.setAttribute("empid", emp.getEmpId()); //°ÑÊı¾İ±£´æµ½»á»°Óò
 			session.setAttribute("empname", emp.getEmpname());
-			//ï¿½Ğ¶Ï½ï¿½É«   1--ï¿½ï¿½Í¨ï¿½Ã»ï¿½  2--ï¿½ï¿½ï¿½ï¿½Ô±
+			//ÅĞ¶Ï½ÇÉ«   1--ÆÕÍ¨ÓÃ»§  2--¹ÜÀíÔ±
 			if (emp.getRole().equals("1")) {
 				url = "emp_main.jsp";
 			}else {
 				url = "admin_main.jsp";
 			}
 		}
-	    //4.ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½
-    	request.getRequestDispatcher(url).forward(request, response); //ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½
+	    //4.ÇëÇó×ª·¢
+    	request.getRequestDispatcher(url).forward(request, response); //ÇëÇó×ª·¢µ½µÇÈëÒ³Ãæ
 
 	}
 
