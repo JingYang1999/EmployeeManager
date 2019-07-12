@@ -8,8 +8,6 @@ var menuUserName="";
  * 加载左侧菜单1
  */
 function loadMenu(){
-
-
 	var json='[{"id": "1","name": "CSI员工之家","icon": null,"url": "","parentId": "",'
 		+'"childs": [{"id": "11","name": "用户管理","icon": "/xingxing.png","url": "user/user.html","parentId": "1",'
 		+'"childs": [{"id": "111","name": "用户查询","icon": "","url": "user/user.html","parentId": "11",'
@@ -55,13 +53,6 @@ function loadMenu(){
 	showNav(msg);
 	//默认显示第一个一级导航菜单的二级菜单。
 	showSideBarByNav(bigDataMenus[0].id);
-	
-	
-				
-		
-				
-			
-	
 }
 /**
  * 根据导航菜单id显示左侧二级菜单

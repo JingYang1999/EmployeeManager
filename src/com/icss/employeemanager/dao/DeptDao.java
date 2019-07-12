@@ -6,26 +6,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.icss.employeemanager.entity.DeptEntity;
+import com.icss.employeemanager.entity.JobEntity;
 
 /**
-*²¿ÃÅµÄÊý¾Ý²ã²Ù×÷
+*ï¿½ï¿½ï¿½Åµï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½
 *@author Giselle
 */
 public class DeptDao extends BaseDao{
     
-	//·ÖÒ³²éÑ¯ËùÓÐ²¿ÃÅÐÅÏ¢
+	//ï¿½ï¿½Ò³ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	public ArrayList<DeptEntity> findAllDept(int pageSize, int firstCount) throws Exception {
-		//1.2 ´ò¿ªÁ¬½Ó
+		//1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		openConnection();
 		//3.Ð´sql
 		String sql = "select * from t_dep limit ?,?";
-		//4.´´½¨Ô¤±àÒë¶ÔÏó
+		//4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.setInt(1, firstCount);
 		pst.setInt(2, pageSize);
-		//5.Ö´ÐÐsql  ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯   ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìÐÐÊý
+		//5.Ö´ï¿½ï¿½sql  ï¿½ï¿½Ñ¯ï¿½ï¿½executeQuery-ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½É¾ï¿½Ä£ï¿½executeUpdate--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		 ResultSet rs = pst.executeQuery();
-		//6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯  1.Ñ¡ÔñÊ²Ã´ÀàÐÍ½ÓÊÕÊý¾Ý   2.next() 3.getXX
+		//6.ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½  1.Ñ¡ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   2.next() 3.getXX
 		 ArrayList<DeptEntity> deps = new ArrayList<DeptEntity>();
 		 DeptEntity dep = null;
 		 while(rs.next()){
@@ -38,17 +39,17 @@ public class DeptDao extends BaseDao{
 		return deps;
 	}
     
-	//»ñÈ¡²¿ÃÅ×ÜÊý
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public int getDeptCount() throws Exception {
-		// 1.2 ´ò¿ªÁ¬½Ó
+		// 1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		openConnection();
 		// 3.Ð´sql
 		String sql = "select count(*) from t_dep";
-		// 4.´´½¨Ô¤±àÒë¶ÔÏó
+		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PreparedStatement pst = conn.prepareStatement(sql);
-		// 5.Ö´ÐÐsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìÐÐÊý
+		// 5.Ö´ï¿½ï¿½sql ï¿½ï¿½Ñ¯ï¿½ï¿½executeQuery-ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½É¾ï¿½Ä£ï¿½executeUpdate--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ResultSet rs = pst.executeQuery();
-		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàÐÍ½ÓÊÕÊý¾Ý 2.next() 3.getXX
+		// 6.ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½ 1.Ñ¡ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2.next() 3.getXX
 		int count = 0;
 		while(rs.next()){
 			count = rs.getInt(1);
@@ -56,9 +57,9 @@ public class DeptDao extends BaseDao{
 		return count;
 	}
 	
-	//É¾³ý²¿ÃÅ
+	//É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void delDep(String[] ids) throws Exception {
-		// 1.2 ´ò¿ªÁ¬½Ó
+		// 1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		openConnection();
 		// 3.Ð´sql
 		String wherein="where depid in(";
@@ -71,29 +72,29 @@ public class DeptDao extends BaseDao{
 			wherein+=")";
 		}
 		String sql = "delete from t_dep "+wherein;
-		// 4.´´½¨Ô¤±àÒë¶ÔÏó
+		// 4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		PreparedStatement pst = conn.prepareStatement(sql);
-		// 5.Ö´ÐÐsql ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯ ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìÐÐÊý
+		// 5.Ö´ï¿½ï¿½sql ï¿½ï¿½Ñ¯ï¿½ï¿½executeQuery-ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½É¾ï¿½Ä£ï¿½executeUpdate--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		//ResultSet rs = pst.executeQuery();
 		pst.executeUpdate();
-		// 6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯ 1.Ñ¡ÔñÊ²Ã´ÀàÐÍ½ÓÊÕÊý¾Ý 2.next() 3.getXX
+		// 6.ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½ 1.Ñ¡ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2.next() 3.getXX
 		
 		
 	}
-	//¼ì²é²¿ÃÅÃû³ÆÊÇ·ñÖØ¸´
+	//ï¿½ï¿½é²¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ø¸ï¿½
 	public boolean checkDepName(String depname) throws Exception {
 		// TODO Auto-generated method stub
-		//1.2 ´ò¿ªÁ¬½Ó
+		//1.2 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			openConnection();
 			//3.Ð´sql
 			String sql = "select * from t_dep where depname=?";
-			//4.´´½¨Ô¤±àÒë¶ÔÏó
+			//4.ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, depname);
-			//5.Ö´ÐÐsql  ²éÑ¯£ºexecuteQuery-·µ»Øresultset½á¹û¼¯   ÔöÉ¾¸Ä£ºexecuteUpdate--·µ»ØÊÜÓ°ÏìÐÐÊý
+			//5.Ö´ï¿½ï¿½sql  ï¿½ï¿½Ñ¯ï¿½ï¿½executeQuery-ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½   ï¿½ï¿½É¾ï¿½Ä£ï¿½executeUpdate--ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			ResultSet rs;
 			rs = pst.executeQuery();
-			//6.Èç¹û²éÑ¯´¦Àíresultset½á¹û¼¯  1.Ñ¡ÔñÊ²Ã´ÀàÐÍ½ÓÊÕÊý¾Ý   2.next() 3.getXX
+			//6.ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½resultsetï¿½ï¿½ï¿½ï¿½ï¿½  1.Ñ¡ï¿½ï¿½Ê²Ã´ï¿½ï¿½ï¿½Í½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½   2.next() 3.getXX
 			int depid=0;
 			while(rs.next()){
 				depid=rs.getInt(1);
@@ -104,7 +105,7 @@ public class DeptDao extends BaseDao{
 			}
 		return result;
 	}
-	//Ìí¼Ó²¿ÃÅ
+	//ï¿½ï¿½Ó²ï¿½ï¿½ï¿½
 	public int insertDep(String depname, String depdetail) throws Exception {
 		openConnection();
 		String sql = "insert into t_dep(depname,depdetail) values(?,?) ";
@@ -135,4 +136,26 @@ public class DeptDao extends BaseDao{
 		
 		pst.executeUpdate();
 	}
+
+	public ArrayList<DeptEntity> getAllDep() throws Exception {
+
+			// TODO Auto-generated method stub
+			openConnection();
+			String sql="select * from t_dep";
+			PreparedStatement pst = conn.prepareStatement(sql);
+			ResultSet rs=pst.executeQuery();
+			ArrayList<DeptEntity> deps=new ArrayList<DeptEntity>();
+			DeptEntity dep;
+			while(rs.next())
+			{
+				dep = new DeptEntity();
+				dep.setDepid(rs.getInt(1));
+				dep.setDepname(rs.getString(2));
+				dep.setDepdetail(rs.getString(3));
+				deps.add(dep);
+				dep=null;
+			}
+			return deps;
+		}
+	
 }

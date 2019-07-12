@@ -41,16 +41,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>aaa</display-name>
-    <servlet-name>aaa</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.aaa</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>aaa</servlet-name>
-    <url-pattern>/aaa</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>CheckDepNameSvl</display-name>
     <servlet-name>CheckDepNameSvl</servlet-name>
     <servlet-class>com.icss.employeemanager.controller.CheckDepNameSvl</servlet-class>
@@ -78,5 +68,75 @@
   <servlet-mapping>
     <servlet-name>UpdateDepSvl</servlet-name>
     <url-pattern>/UpdateDepSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindAllEmpSvl</display-name>
+    <servlet-name>FindAllEmpSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.FindAllEmpSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindAllEmpSvl</servlet-name>
+    <url-pattern>/FindAllEmpSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindAllJobSvl</display-name>
+    <servlet-name>FindAllJobSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.FindAllJobSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindAllJobSvl</servlet-name>
+    <url-pattern>/FindAllJobSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchEmpSvl</display-name>
+    <servlet-name>SearchEmpSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.SearchEmpSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchEmpSvl</servlet-name>
+    <url-pattern>/SearchEmpSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DelEmpSvl</display-name>
+    <servlet-name>DelEmpSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.DelEmpSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DelEmpSvl</servlet-name>
+    <url-pattern>/DelEmpSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FindEmpDetailSvl</display-name>
+    <servlet-name>FindEmpDetailSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.FindEmpDetailSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FindEmpDetailSvl</servlet-name>
+    <url-pattern>/FindEmpDetailSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateEmpSvl</display-name>
+    <servlet-name>UpdateEmpSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.UpdateEmpSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateEmpSvl</servlet-name>
+    <url-pattern>/UpdateEmpSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddDocSvl</display-name>
+    <servlet-name>AddDocSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.AddDocSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddDocSvl</servlet-name>
+    <url-pattern>/AddDocSvl</url-pattern>
   </servlet-mapping>
 </web-app>

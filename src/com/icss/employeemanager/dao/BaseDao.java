@@ -21,7 +21,7 @@ public class BaseDao {
 		String username = "root"; 
 		String password = "jingyang";
 		conn = DriverManager.getConnection(url, username, password);
-		System.out.println(conn.toString());
+		//System.out.println(conn.toString());
 	}
 	//�ر�����
 	public void closeConnection(){

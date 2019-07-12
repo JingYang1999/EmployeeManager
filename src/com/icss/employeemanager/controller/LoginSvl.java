@@ -21,33 +21,25 @@ public class LoginSvl extends HttpServlet {
     }
    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    //1.½ÓÊÕÒ³ÃæµÄ²ÎÊı
-		String empname = request.getParameter("loginname");  //»ñÈ¡ÊäÈë¿òÊäÈëµÄÄÚÈİ£¬²ÎÊıºÍinputµÄnameµÄÊôĞÔÖµ±ØĞëÒ»ÖÂ
+		String empname = request.getParameter("loginname");
 	    String password = request.getParameter("password");
-        
-	    //2.´´½¨ÒµÎñÂß¼­²ãµÄ¶ÔÏó£¬µ÷ÓÃµÇÂ¼·½·¨£¬ÄÃµ½·µ»ØÖµ
-	    EmployeeBiz biz = new EmployeeBiz();//´´½¨ÒµÎñ²ã¶ÔÏó
+	    EmployeeBiz biz = new EmployeeBiz();
 	    EmployeeEntity emp = biz.login(empname, password);  
-	    
-	    //3.°ÑÊı¾İ±£´æµ½Óò¶ÔÏó
-	    //Èç¹ûµÃµ½µÄÊı¾İÎªnullÊÇµÇÂ¼Ê§°Ü£¬·µ»Øµ½µÇÈëÒ³Ãæ£¬²¢·µ»Ø´íÎóĞÅÏ¢£»Èç¹û²»Îª¿ÕÅĞ¶Ï½ÇÉ«Ìø×ªµ½²»Í¬Ò³Ãæ
 	    String url = "";
 	    if (emp==null) {
-	    	request.setAttribute("msg", "Ô±¹¤ĞÕÃû»òÕßÃÜÂë´íÎó");  //°ÑÊı¾İ±£´æµ½ÇëÇóÓò
-	    	url="loginForm.jsp";  //ÇëÇó×ª·¢µÄÄ¿±ê×ÊÔ´
+	    	request.setAttribute("msg", "name æˆ–è€… ");
+	    	url="loginForm.jsp";
 		}else {
-			HttpSession session = request.getSession();//»ñµÃsession¶ÔÏó
-			session.setAttribute("empid", emp.getEmpId()); //°ÑÊı¾İ±£´æµ½»á»°Óò
+			HttpSession session = request.getSession();
+			session.setAttribute("empid", emp.getEmpId());
 			session.setAttribute("empname", emp.getEmpname());
-			//ÅĞ¶Ï½ÇÉ«   1--ÆÕÍ¨ÓÃ»§  2--¹ÜÀíÔ±
 			if (emp.getRole().equals("1")) {
 				url = "emp_main.jsp";
 			}else {
 				url = "admin_main.jsp";
 			}
 		}
-	    //4.ÇëÇó×ª·¢
-    	request.getRequestDispatcher(url).forward(request, response); //ÇëÇó×ª·¢µ½µÇÈëÒ³Ãæ
+	    request.getRequestDispatcher(url).forward(request, response);
 
 	}
 

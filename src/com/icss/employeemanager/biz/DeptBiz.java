@@ -8,68 +8,85 @@ import com.icss.employeemanager.entity.DeptEntity;
 import com.icss.employeemanager.utils.ResultPage;
 
 /**
-*²¿ÃÅÏà¹ØµÄÒµÎñÂß¼­²ã
-*@author Giselle
-*/
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½Òµï¿½ï¿½ï¿½ß¼ï¿½ï¿½ï¿½
+ * 
+ * @author Giselle
+ */
 public class DeptBiz {
-    DeptDao dao = new DeptDao();  //´´½¨Êý¾Ý²ã¶ÔÏó
-	//·ÖÒ³²é¿´ËùÓÐ²¿ÃÅÐÅÏ¢
+	DeptDao dao = new DeptDao(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½
+	// ï¿½ï¿½Ò³ï¿½é¿´ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+
 	public void findAllDept(ResultPage<DeptEntity> pageInfo) {
 		try {
-//			(1)¶¨ÒåÁ½¸ö±äÁ¿£ºpageSize=2£»first= (µ±Ç°Ò³-1)*pageSize
-			int pageSize = 2;//Ã¿Ò³Õ¹Ê¾µÄÌõÊý
-			int firstCount = (pageInfo.getCurrentPage()-1)*pageSize;  //ÆðÊ¼ÌõÊý
-//			(2)»ñÈ¡µ±Ç°Ò³Õ¹Ê¾µÄÊý¾Ý---µ÷ÓÃÊý¾Ý²ã·½·¨
-			ArrayList<DeptEntity> deps = dao.findAllDept(pageSize,firstCount);
+//			(1)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½pageSize=2ï¿½ï¿½first= (ï¿½ï¿½Ç°Ò³-1)*pageSize
+			int pageSize = 2;// Ã¿Ò³Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+			int firstCount = (pageInfo.getCurrentPage() - 1) * pageSize; // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
+//			(2)ï¿½ï¿½È¡ï¿½ï¿½Ç°Ò³Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½---ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ã·½ï¿½ï¿½
+			ArrayList<DeptEntity> deps = dao.findAllDept(pageSize, firstCount);
 			pageInfo.setLists(deps);
-//			(3)»ñÈ¡×ÜÌõÊý---µ÷ÓÃÊý¾Ý²ã·½·¨
+//			(3)ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½---ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ã·½ï¿½ï¿½
 			int totalCount = dao.getDeptCount();
 			pageInfo.setTotalCount(totalCount);
-//			(4)¼ÆËã×ÜÒ³Êý  ×ÜÌõÊý%Ã¿Ò³Õ¹Ê¾µÄÌõÊý==0?×ÜÌõÊý/Ã¿Ò³Õ¹Ê¾µÄÌõÊý:×ÜÌõÊý/Ã¿Ò³Õ¹Ê¾µÄÌõÊý+1¡£
-			int totalPage = totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
-		    pageInfo.setTotalPage(totalPage);
-		} catch (Exception e){
+//			(4)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%Ã¿Ò³Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½==0?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ã¿Ò³Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/Ã¿Ò³Õ¹Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+1ï¿½ï¿½
+			int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
+			pageInfo.setTotalPage(totalPage);
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-//			(5)¹Ø±ÕÁ¬½Ó
+		} finally {
+//			(5)ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
 			dao.closeConnection();
 		}
-		
+
 	}
-	//É¾³ý²¿ÃÅ
+
+	// É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	public void delDep(String[] ids) {
 		try {
 			dao.delDep(ids);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
-//			¹Ø±ÕÁ¬½Ó
+		} finally {
+//			ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½
 			dao.closeConnection();
 		}
 	}
-	//¼ì²é²¿ÃÅÃû³ÆÊÇ·ñÌí¼Ó¹ý
+
+	// ï¿½ï¿½é²¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Ó¹ï¿½
 	public boolean checkDepName(String depname) {
-		boolean result=false;
+		boolean result = false;
 		try {
 			result = dao.checkDepName(depname);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			dao.closeConnection();
 		}
 		return result;
 	}
+
 	public boolean insertDep(String depname, String depdetail) throws Exception {
-		boolean result=false;
-		int res=dao.insertDep(depname,depdetail);
+		int res = dao.insertDep(depname, depdetail);
 		dao.closeConnection();
-		return res>0?true:false;
+		return res > 0 ? true : false;
 	}
+
 	public void updateDep(String depid, String depname, String depdetail) throws SQLException {
 		// TODO Auto-generated method stub
-		dao.updateDep(depid,depname,depdetail);
+		dao.updateDep(depid, depname, depdetail);
 		dao.closeConnection();
+	}
+
+	public ArrayList<DeptEntity> getAllDep() {
+		ArrayList<DeptEntity> deps = null;
+		try {
+			deps = dao.getAllDep();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dao.closeConnection();
+		return deps;
 	}
 
 }
