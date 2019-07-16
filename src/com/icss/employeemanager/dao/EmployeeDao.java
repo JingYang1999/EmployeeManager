@@ -1,16 +1,18 @@
 package com.icss.employeemanager.dao;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import com.icss.employeemanager.entity.EmployeeEntity;
+
 public class EmployeeDao extends BaseDao {
 	public EmployeeEntity login(String empname, String password) throws Exception {
 		openConnection();
 		String sql = "select * from t_employee where empname=? and password=? and status=?";
 		PreparedStatement pst = conn.prepareStatement(sql);
-		pst.setString(1, empname); 
+		pst.setString(1, empname);
 		pst.setString(2, password);
 		pst.setString(3, "1");
 		ResultSet rs = pst.executeQuery();
@@ -24,6 +26,7 @@ public class EmployeeDao extends BaseDao {
 		}
 		return emp;
 	}
+
 	public int addEmployee(EmployeeEntity emp) throws Exception {
 		openConnection();
 		String sql = "insert into t_employee(depid,jobid,empname,cardnumber,sex,education,email,phone,tel,party,qq,address,postcode,birthday,race,speciality,hobby,remark,createtime,password,role,status)values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -53,6 +56,7 @@ public class EmployeeDao extends BaseDao {
 		int res = pst.executeUpdate();
 		return res;
 	}
+
 	public ArrayList<EmployeeEntity> findAllEmp() throws Exception {
 		openConnection();
 		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and status=?";
@@ -75,10 +79,14 @@ public class EmployeeDao extends BaseDao {
 			emp.setPhone(rs.getString("phone"));
 			emp.setSex(rs.getString("sex"));
 			emp.setStatus(rs.getString("status"));
+			emp.setRole(rs.getString("role"));
+			emp.setFacePath(rs.getString("facepath"));
+			emp.setFaceUrl(rs.getString("faceurl"));
 			list.add(emp);
 		}
 		return list;
 	}
+
 	public EmployeeEntity findEmpDetail(int empid) throws Exception {
 		openConnection();
 		String sql = "select * from t_employee e,t_dep d , t_job j where e.depid=d.depid and e.jobid=j.jobid and e.empid=?";
@@ -116,6 +124,7 @@ public class EmployeeDao extends BaseDao {
 		}
 		return emp;
 	}
+
 	public int getEmpCount() throws Exception {
 		openConnection();
 		String sql = "select count(*) from t_employee where status=?";
@@ -128,6 +137,7 @@ public class EmployeeDao extends BaseDao {
 		}
 		return res;
 	}
+
 	public ArrayList<EmployeeEntity> searchEmp(String jobid, String empname, String cardnumber, String sex,
 			String phone, String depid) throws Exception {
 		openConnection();
@@ -158,7 +168,7 @@ public class EmployeeDao extends BaseDao {
 		ResultSet rs = pst.executeQuery();
 		ArrayList<EmployeeEntity> list = new ArrayList<EmployeeEntity>();
 		EmployeeEntity emp = null;
-		while (rs.next()) { 
+		while (rs.next()) {
 			emp = new EmployeeEntity();
 			emp.setEmpId(rs.getInt("empid"));
 			emp.setEmpname(rs.getString("empname"));
@@ -172,28 +182,32 @@ public class EmployeeDao extends BaseDao {
 			emp.setPhone(rs.getString("phone"));
 			emp.setSex(rs.getString("sex"));
 			emp.setStatus(rs.getString("status"));
-			list.add(emp); 
+			list.add(emp);
 		}
 		return list;
 	}
+
 	public void delEmp(String[] empids, Integer loginEmpid) throws Exception {
 		openConnection();
-		if(empids==null)return;
+		if (empids == null)
+			return;
 		String sql = "update t_employee set status=2 where empid in (";
-		if(empids[0]!=null) sql += empids[0];
+		if (empids[0] != null)
+			sql += empids[0];
 		for (int i = 1; i < empids.length; i++) {
-			sql += ","+empids[i];
+			sql += "," + empids[i];
 		}
-		sql+=")";
+		sql += ")";
 		System.out.println(sql);
 		PreparedStatement pst = conn.prepareStatement(sql);
 		pst.executeUpdate();
 		closeConnection();
 	}
+
 	public void updateEmp(EmployeeEntity emp) throws Exception {
 		// TODO Auto-generated method stub
 		openConnection();
-		
+
 		int empid = emp.getEmpId();
 		String empname = emp.getEmpname();
 		String cardnumber = emp.getCardunmber();
@@ -213,16 +227,14 @@ public class EmployeeDao extends BaseDao {
 		String hobby = emp.getHobby();
 		String remark = emp.getRemark();
 		int depid = emp.getDepId();
-		
-		String sql="UPDATE t_employee SET "+
-				"empname = ? , cardnumber = ? , sex = ? , jobid = ? , education = ? "+
-				"email = ? , phone = ? , tel = ? , party = ? , qq = ? , address = ? "+
-				"postcode = ? birthday = ? , race = ? , speciality = ? , hobby = ? "+
-				"remark = ? , depid = ? "+
-				"WHERE empid = ? ";
-		
+
+		String sql = "UPDATE t_employee SET " + "empname = ? , cardnumber = ? , sex = ? , jobid = ? , education = ? "
+				+ "email = ? , phone = ? , tel = ? , party = ? , qq = ? , address = ? "
+				+ "postcode = ? birthday = ? , race = ? , speciality = ? , hobby = ? " + "remark = ? , depid = ? "
+				+ "WHERE empid = ? ";
+
 		PreparedStatement pst = conn.prepareStatement(sql);
-		
+
 		pst.setString(1, empname);
 		pst.setString(2, cardnumber);
 		pst.setString(3, sex);
@@ -233,7 +245,7 @@ public class EmployeeDao extends BaseDao {
 		pst.setString(8, tel);
 		pst.setString(9, party);
 		pst.setString(10, qq);
-		pst.setString(11,address);
+		pst.setString(11, address);
 		pst.setString(12, postcode);
 		pst.setTimestamp(13, birthday);
 		pst.setString(14, race);
@@ -243,5 +255,46 @@ public class EmployeeDao extends BaseDao {
 		pst.setInt(18, depid);
 		pst.setInt(19, empid);
 		pst.executeUpdate();
+	}
+
+	public void updateFaceUrlByName(Integer empid, String urlPath, String path) throws Exception {
+		// TODO Auto-generated method stub
+		openConnection();
+
+		String sql = "update t_employee set faceurl=? , facepath=? where empid=?";
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setString(1, urlPath);
+		pst.setString(2, path);
+		pst.setInt(3, empid);
+		pst.executeUpdate();
+	}
+
+	public boolean checkPswd(int empid, String pswd) throws Exception {
+		// TODO Auto-generated method stub
+		openConnection();
+		String sql = "select * from t_employee where empid=? ";
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setInt(1, empid);
+		ResultSet rs = pst.executeQuery();
+		String old_pswd = "";
+		while (rs.next()) {
+			old_pswd = rs.getString("password");
+		}
+		if (pswd.equals(old_pswd)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean updatePswd(int empid, String pswd) throws Exception {
+		// TODO Auto-generated method stub
+		openConnection();
+		String sql = "update t_employee set password=? where empid=? ";
+		PreparedStatement pst = conn.prepareStatement(sql);
+		pst.setString(1, pswd);
+		pst.setInt(2, empid);
+		pst.executeUpdate();
+		return checkPswd(empid,pswd);
 	}
 }

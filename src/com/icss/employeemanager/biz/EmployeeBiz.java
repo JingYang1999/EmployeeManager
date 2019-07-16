@@ -88,4 +88,44 @@ public class EmployeeBiz {
 			dao.closeConnection();
 		}
 	}
+
+	public void updateFaceUrlByName1(Integer empid, String urlPath, String path) {
+		// TODO Auto-generated method stub
+		try {
+			dao.updateFaceUrlByName(empid,urlPath,path) ;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.closeConnection();
+		}
+	}
+
+	public Boolean checkPswd(int empid, String pswd) {
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		try {
+			flag=dao.checkPswd(empid,pswd);
+			System.out.println("flag+"+flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dao.closeConnection();
+			return flag;
+		}
+	}
+
+	public Boolean updatePswd(int empid, String pswd) {
+		// TODO Auto-generated method stub
+		boolean flag=false;
+		try {
+			flag=dao.updatePswd(empid,pswd);
+			System.out.println("flag+"+flag);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dao.closeConnection();
+			return flag;
+		}
+	}
 }

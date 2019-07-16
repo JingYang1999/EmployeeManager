@@ -13,7 +13,7 @@
     <description></description>
     <display-name>LoginSvl</display-name>
     <servlet-name>LoginSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.LoginSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.global.LoginSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginSvl</servlet-name>
@@ -23,7 +23,7 @@
     <description></description>
     <display-name>FindAllDeptSvl</display-name>
     <servlet-name>FindAllDeptSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindAllDeptSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.dep.FindAllDeptSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllDeptSvl</servlet-name>
@@ -33,7 +33,7 @@
     <description></description>
     <display-name>DelDepSvl</display-name>
     <servlet-name>DelDepSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.DelDepSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.dep.DelDepSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DelDepSvl</servlet-name>
@@ -43,7 +43,7 @@
     <description></description>
     <display-name>CheckDepNameSvl</display-name>
     <servlet-name>CheckDepNameSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.CheckDepNameSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.dep.CheckDepNameSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CheckDepNameSvl</servlet-name>
@@ -53,7 +53,7 @@
     <description></description>
     <display-name>AddDepSvl</display-name>
     <servlet-name>AddDepSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.AddDepSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.dep.AddDepSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddDepSvl</servlet-name>
@@ -63,7 +63,7 @@
     <description></description>
     <display-name>UpdateDepSvl</display-name>
     <servlet-name>UpdateDepSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.UpdateDepSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.dep.UpdateDepSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateDepSvl</servlet-name>
@@ -73,7 +73,7 @@
     <description></description>
     <display-name>FindAllEmpSvl</display-name>
     <servlet-name>FindAllEmpSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindAllEmpSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.emp.FindAllEmpSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllEmpSvl</servlet-name>
@@ -83,7 +83,7 @@
     <description></description>
     <display-name>FindAllJobSvl</display-name>
     <servlet-name>FindAllJobSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindAllJobSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.job.FindAllJobSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindAllJobSvl</servlet-name>
@@ -93,7 +93,7 @@
     <description></description>
     <display-name>SearchEmpSvl</display-name>
     <servlet-name>SearchEmpSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.SearchEmpSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.emp.SearchEmpSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SearchEmpSvl</servlet-name>
@@ -103,7 +103,7 @@
     <description></description>
     <display-name>DelEmpSvl</display-name>
     <servlet-name>DelEmpSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.DelEmpSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.emp.DelEmpSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>DelEmpSvl</servlet-name>
@@ -113,7 +113,7 @@
     <description></description>
     <display-name>FindEmpDetailSvl</display-name>
     <servlet-name>FindEmpDetailSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.FindEmpDetailSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.emp.FindEmpDetailSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>FindEmpDetailSvl</servlet-name>
@@ -123,7 +123,7 @@
     <description></description>
     <display-name>UpdateEmpSvl</display-name>
     <servlet-name>UpdateEmpSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.UpdateEmpSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.emp.UpdateEmpSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateEmpSvl</servlet-name>
@@ -133,10 +133,83 @@
     <description></description>
     <display-name>AddDocSvl</display-name>
     <servlet-name>AddDocSvl</servlet-name>
-    <servlet-class>com.icss.employeemanager.controller.AddDocSvl</servlet-class>
+    <servlet-class>com.icss.employeemanager.controller.doc.AddDocSvl</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>AddDocSvl</servlet-name>
     <url-pattern>/AddDocSvl</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>LoginFilter</display-name>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.icss.employeemanager.utils.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginOutSvl</display-name>
+    <servlet-name>LoginOutSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.global.LoginOutSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginOutSvl</servlet-name>
+    <url-pattern>/LoginOutSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FaceRegisterSvl</display-name>
+    <servlet-name>FaceRegisterSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.global.FaceRegisterSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FaceRegisterSvl</servlet-name>
+    <url-pattern>/FaceRegisterSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FaceLoginSvl</display-name>
+    <servlet-name>FaceLoginSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.global.FaceLoginSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FaceLoginSvl</servlet-name>
+    <url-pattern>/FaceLoginSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>checkPswd</display-name>
+    <servlet-name>checkPswd</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.global.checkPswd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>checkPswd</servlet-name>
+    <url-pattern>/checkPswd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditPswdSvl</display-name>
+    <servlet-name>EditPswdSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.global.EditPswdSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPswdSvl</servlet-name>
+    <url-pattern>/EditPswdSvl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SearchDepSvl</display-name>
+    <servlet-name>SearchDepSvl</servlet-name>
+    <servlet-class>com.icss.employeemanager.controller.dep.SearchDepSvl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchDepSvl</servlet-name>
+    <url-pattern>/SearchDepSvl</url-pattern>
   </servlet-mapping>
 </web-app>
