@@ -65,12 +65,21 @@
 	    })
 	    function gotoPage(totalPage){
 			var num=$("#pager_jump_page_size").val();
+			var depn=$("#name").val();
 			if(num>0 && num<=totalPage){
-				window.location.href="FindAllDeptSvl?current="+num;
+				window.location.href="FindAllDeptSvl?current="+num+""&finddepname="+depn;
 			}else{
 				alert("跳转页数只能是1-"+totalPage+"之间");
 			}
 		}
+	</script>
+	<script type="text/javascript">
+	function doSearch(){
+		var depn=$("#name").val();
+		var curn=$("#currentPage").val();
+		window.location.href="FindAllDeptSvl?current="+curn+"&finddepname="+depn;
+	}
+	
 	</script>
 </head>
 <body>
@@ -91,13 +100,13 @@
 		  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
 		    <tr>
 			  <td class="fftd">
-			  	
 				    <table width="100%" border="0" cellpadding="0" cellspacing="0">
 					  <tr>
 					    <td class="font3">
-					    	部门名称：<input type="text" name="name">
-					    	 <input type="submit" value="搜索"/>
+					    	部门名称：<input type="text" name="name" id="name" value="${requestScope.finddepname}">
+					    	 <input type="button" value="搜索" onclick="doSearch()"/>
 					    	<input id="delete" type="button" value="删除"/>
+					    	<input type="hidden" id="currentPage" value="${pageinfo.currentPage}"/>
 					    </td>
 					  </tr>
 					</table>
@@ -148,12 +157,11 @@
 								
 								<c:if test="${pageinfo.currentPage ne 1}">
 								<span class="disabled">
-								<a href="FindAllDeptSvl?current=${pageinfo.currentPage-1}">上一页</a></span>
+								<a href="FindAllDeptSvl?current=${pageinfo.currentPage-1}&finddepname=${requestScope.finddepname}">上一页</a></span>
 								</c:if>
 								
-								
 								<c:if test="${pageinfo.currentPage != pageinfo.totalPage }">
-								<a href="FindAllDeptSvl?current=${pageinfo.currentPage+1}">下一页</a>
+								<a href="FindAllDeptSvl?current=${pageinfo.currentPage+1}&finddepname=${requestScope.finddepname}">下一页</a>
 								</c:if>&nbsp;跳转到&nbsp;&nbsp;
 								<input
 								style="text-align: center; BORDER-RIGHT: #aaaadd 1px solid; PADDING-RIGHT: 5px; BORDER-TOP: #aaaadd 1px solid; PADDING-LEFT: 5px; PADDING-BOTTOM: 2px; MARGIN: 2px; BORDER-LEFT: #aaaadd 1px solid; COLOR: #000099; PADDING-TOP: 2px; BORDER-BOTTOM: #aaaadd 1px solid; TEXT-DECORATION: none"
@@ -170,6 +178,7 @@
 								style="COLOR: #0061de; MARGIN-RIGHT: 3px; PADDING-TOP: 2px; TEXT-DECORATION: none">总共<font
 								color="red">${pageinfo.totalCount}</font>条记录，当前显示第${pageinfo.currentPage}页数据。
 							</td>
+							
 						</tr>
 					</tbody>
 				</table>

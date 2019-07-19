@@ -4,11 +4,11 @@ public class ConstValue {
 	static int depPageSize = 4;
 	static int jobPageSize = 4;
 	static int empPageSize = 10;
-	static int notPageSize = 10;
-	static int docPageSize = 10;
-	static int repPageSize = 10;
-	static int apfPageSize = 10;
-	static int atdPageSize = 10;
+	static int notPageSize = 4;
+	static int docPageSize = 4;
+	static int repPageSize = 4;
+	static int apfPageSize = 4;
+	static int atdPageSize = 4;
 
 	public static int getDepPageSize() {
 		return depPageSize;

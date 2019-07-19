@@ -38,4 +38,17 @@ public class JobBiz {
 		dao.closeConnection();
 		return jobs;
 	}
+
+	public boolean checkJobName(String jobname) throws Exception {
+		// TODO Auto-generated method stub
+		boolean result=dao.checkJobName(jobname);
+		return result;
+	}
+
+	public boolean insertJob(String jobname, String jobdetail) throws Exception {
+		// TODO Auto-generated method stub
+		int res=dao.insertJob(jobname,jobdetail);
+		dao.closeConnection();
+		return res>0?true:false;
+	}
 }

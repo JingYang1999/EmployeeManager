@@ -21,7 +21,7 @@ import com.icss.employeemanager.entity.EmployeeEntity;
 import com.icss.employeemanager.utils.FaceClient;
 
 import Decoder.BASE64Encoder;
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class checkPswd
@@ -45,12 +45,8 @@ public class checkPswd extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		String pswd = request.getParameter("old_pswd");
 		
-		System.out.println("pswd:"+pswd);
-		
 		HttpSession session = request.getSession();
 		java.lang.Integer empid_s=(java.lang.Integer) session.getAttribute("empid");
-		
-		System.out.println("empid:"+empid_s);
 		
 		int empid = empid_s;
 		

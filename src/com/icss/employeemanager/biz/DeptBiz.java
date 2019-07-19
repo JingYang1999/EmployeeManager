@@ -5,16 +5,19 @@ import java.util.ArrayList;
 
 import com.icss.employeemanager.dao.DeptDao;
 import com.icss.employeemanager.entity.DeptEntity;
+import com.icss.employeemanager.utils.ConstValue;
 import com.icss.employeemanager.utils.ResultPage;
 
 public class DeptBiz {
 	DeptDao dao = new DeptDao();
 
-	public void findAllDept(ResultPage<DeptEntity> pageInfo) {
+	public ResultPage<DeptEntity> findAllDept(int currentPage, String finddepname) {
+		ResultPage<DeptEntity> pageInfo = new ResultPage<DeptEntity>();
+		pageInfo.setCurrentPage(currentPage);  
+		int pageSize = ConstValue.getDepPageSize();//从常量库调取页面大小
+		int firstCount = (pageInfo.getCurrentPage() - 1) * pageSize;
 		try {
-			int pageSize = 4;
-			int firstCount = (pageInfo.getCurrentPage() - 1) * pageSize;
-			ArrayList<DeptEntity> deps = dao.findAllDept(pageSize, firstCount);
+			ArrayList<DeptEntity> deps = dao.findAllDept(pageSize, firstCount,finddepname);
 			pageInfo.setLists(deps);
 			int totalCount = dao.getDeptCount();
 			pageInfo.setTotalCount(totalCount);
@@ -25,6 +28,7 @@ public class DeptBiz {
 		} finally {
 			dao.closeConnection();
 		}
+		return pageInfo;
 	}
 
 	public void delDep(String[] ids) {

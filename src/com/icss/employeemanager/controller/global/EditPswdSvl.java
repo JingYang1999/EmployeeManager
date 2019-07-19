@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.icss.employeemanager.biz.EmployeeBiz;
 
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class EditPswdSvl

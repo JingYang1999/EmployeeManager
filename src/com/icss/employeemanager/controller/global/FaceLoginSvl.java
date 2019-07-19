@@ -16,7 +16,7 @@ import com.icss.employeemanager.entity.EmployeeEntity;
 import com.icss.employeemanager.utils.FaceClient;
 
 import Decoder.BASE64Encoder;
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * Servlet implementation class FaceLoginSvl
@@ -54,10 +54,11 @@ public class FaceLoginSvl extends HttpServlet {
 				if (loginBool) {
 					json.put("message", "登录成功");
 					json.put("this_role", emp.getRole());
-					json.put("current_user",emp);
+					//json.put("current_user",emp);
 					
 					session.setAttribute("empid", emp.getEmpId());
 					session.setAttribute("empname", emp.getEmpname());
+					session.setAttribute("emprole", emp.getRole());
 					session.setAttribute("empentity", emp);
 					break;
 				}

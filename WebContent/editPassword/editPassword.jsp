@@ -83,7 +83,7 @@
 			var oldPassword = $("#oldPassword").val();
 			if (typeof (oldPassword) == 'undefined' || oldPassword.trim() == "") {
 				$("#tishi").html("当前密码不能为空");
-				return false;
+				return "false";
 			}
 			$.ajax({
 						type : "POST",
@@ -101,18 +101,19 @@
 						success : function(json) {
 							if (json.message == "ok") {
 								//alert("密碼正確");
+								document.getElementById("oldPassword").disabled = "disabled";
+								document.getElementById("oldPassword").type = "hidden";
 								document.getElementById("newPassword").disabled = "";
 								document.getElementById("newPasswordCon").disabled = "";
 								$("#tishi").html(json.message);
-								newPassword
-								return true;
+								return "true";
 							} else {
-
+								document.getElementById("oldPassword").disabled = "";
 								document.getElementById("newPassword").disabled = "disabled";
 								document.getElementById("newPasswordCon").disabled = "disabled";
 								//alert("密碼錯誤");
 								$("#tishi").html(json.message);
-								return false;
+								return "false";
 							}
 						}
 					});
@@ -145,7 +146,7 @@
 				$("#tishi").html("当前密码不能为空");
 				flag = '-5';
 			}
-			if (checkPswd() == false) {
+			if (checkPswd() == "false") {
 				flag = '-6';
 			}
 			if (flag != '0') {

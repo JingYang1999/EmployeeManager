@@ -106,7 +106,6 @@ public class EmployeeBiz {
 		boolean flag=false;
 		try {
 			flag=dao.checkPswd(empid,pswd);
-			System.out.println("flag+"+flag);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

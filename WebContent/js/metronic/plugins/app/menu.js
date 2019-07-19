@@ -10,59 +10,40 @@ var menuUserName = "";
  */
 function loadMenu(r) {
 	if (r == "1") { // 普通員工
-		var json = '[{"id": "1","name": "CIST员工之家","icon": null,"url": "","parentId": "",'
-				+ '"childs": [{"id": "12", "name": "部门管理","icon": "/xingxing.png","url": "dept/dept.html","parentId": "1",'
-				+ '"childs": []},{"id": "14","name": "职位管理","icon": "/xingxing.png","url": "job/job.jsp","parentId": "1",'
-				+ '"childs": []},{"id": "16","name": "公告管理","icon": "/xingxing.png","url": "notice/notice.html","parentId": "1",'
-				+ '"childs": []},{"id": "17","name": "资料共享中心","icon": "/xingxing.png","url": "document/document.html","parentId": "1",'
-				+ '"childs": []},{"id": "18","name": "工作报表管理","icon": "/xingxing.png","url": "document/document.html","parentId": "1",'
-				+ '"childs": [{"id": "181","name": "查看日报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "182","name": "提交日报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "183","name": "查看月报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "184","name": "提交月报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []}]},{"id": "20","name": "申请管理","icon": "/xingxing.png","url": "document/document.html","parentId": "1",'
-				+ '"childs": [{"id": "201","name": "查询申请","icon": "","url": "document/document.html","parentId": "20",'
-				+ '"childs": []},{"id": "202","name": "提交申请","icon": "","url": "document/showAddDocument.html","parentId": "20",'
-				+ '"childs": []}]},{"id": "23","name": "考勤管理","icon": "/xingxing.png","url": "notice/notice.html","parentId": "1",'
-				+ '"childs": [{"id": "231","name": "打卡","icon": "","url": "notice/notice.html","parentId": "23",'
-				+ '"childs": []},{"id": "232","name": "查看打卡记录","icon": "","url": "notice/showAddNotice.html","parentId": "23","childs": []}]}]}]';
+		var json = '[{"id": "1","name": "CIST员工之家--员工","icon": null,"url": "","parentId": "",'
+			/**/
+			+ '"childs": [{"id": "12", "name": "部门查看","icon": null,"url": "findAllDepSvl","parentId": "1",'
+			+ '"childs": []},{"id": "14","name": "职位查看","icon": null,"url": "findAllJobSvl","parentId": "1",'
+			+ '"childs": []},{"id": "16","name": "公告查看","icon": null,"url": "findAllNoticeSvl","parentId": "1",'
+			+ '"childs": []},{"id": "20","name": "申请管理","icon": null,"url": "","parentId": "1",'
+			+ '"childs": [{"id": "201","name": "查询申请","icon": null,"url": "GetApplyInfo","parentId": "20",'
+			+ '"childs": []},{"id": "202","name": "提交申请","icon": null,"url": "apply/addapply.jsp","parentId": "20",'
+
+			+ '"childs": []}]}]}]';
 	} else if (r == "2") { // 管理員
 		var json = '[{"id": "1","name": "CIST员工之家--管理員","icon": null,"url": "","parentId": "",'
 				/**/
-				+ '"childs": [{"id": "12", "name": "部门管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "121","name": "部门查询","icon": "","url": "FindAllDeptSvl","parentId": "12",'
-				+ '"childs": []}   ,{"id": "122","name": "添加部门","icon": "","url": "dept/showAddDept.jsp","parentId": "12",'
+				+ '"childs": [{"id": "12", "name": "部门管理","icon": null,"url": "","parentId": "1",'
+				+ '"childs": [{"id": "121","name": "部门查询","icon": null,"url": "FindAllDeptSvl","parentId": "12",'
+				+ '"childs": []}   ,{"id": "122","name": "添加部门","icon": null,"url": "dept/showAddDept.jsp","parentId": "12",'
 				/**/
-				+ '"childs": []} ]},{"id": "14","name": "职位管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "141","name": "职位查询","icon": "","url": "job/job.jsp","parentId": "14",'
+				+ '"childs": []} ]},{"id": "14","name": "职位管理","icon": null,"url": "","parentId": "1",'
+				+ '"childs": [{"id": "141","name": "职位查询","icon": "","url": "FindAllJobSvl","parentId": "14",'
 				+ '"childs": []},{"id": "142","name": "添加职位","icon": "","url": "job/showAddJob.jsp","parentId": "14",'
 				/**/
-				+ '"childs": []}]},{"id": "15","name": "员工管理","icon": "/xingxing.png","url": "","parentId": "1",'
+				+ '"childs": []}]},{"id": "15","name": "员工管理","icon": null,"url": "","parentId": "1",'
 				+ '"childs": [{"id": "151","name": "员工查询","icon": "","url": "FindAllEmpSvl","parentId": "15",'
 				+ '"childs": []},{"id": "152","name": "添加员工","icon": "","url": "employee/showAddEmployee.jsp","parentId": "15",'
 				/**/
-				+ '"childs": []}]},{"id": "16","name": "公告管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "161","name": "公告查询","icon": "","url": "notice/notice.html","parentId": "16",'
+				+ '"childs": []}]},{"id": "16","name": "公告管理","icon": null,"url": "","parentId": "1",'
+				+ '"childs": [{"id": "161","name": "公告查询","icon": "","url": "FindAllNoticeSvl","parentId": "16",'
 				+ '"childs": []},{"id": "162","name": "添加公告","icon": "","url": "notice/showAddNotice.html","parentId": "16",'
 				/**/
-				+ '"childs": []}]},{"id": "17","name": "资料共享中心","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "171","name": "文档查询","icon": "","url": "document/document.html","parentId": "17",'
-				+ '"childs": []},{"id": "172","name": "上传文档","icon": "","url": "document/showAddDocument.jsp","parentId": "17",'
-				/**/
-				+ '"childs": []}]},{"id": "18","name": "工作报表管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "181","name": "查看日报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "182","name": "提交日报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "183","name": "查看月报","icon": "","url": "document/document.html","parentId": "18",'
-				+ '"childs": []},{"id": "184","name": "提交月报","icon": "","url": "document/document.html","parentId": "18",'
-				/**/
 				+ '"childs": []}]},{"id": "20","name": "申请管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "201","name": "查询申请","icon": "","url": "document/document.html","parentId": "20",'
-				+ '"childs": []},{"id": "202","name": "提交申请","icon": "","url": "document/showAddDocument.html","parentId": "20",'
-				+ '"childs": []},{"id": "203","name": "审批申请","icon": "","url": "document/showAddDocument.html","parentId": "20",'
-				/**/
-				+ '"childs": []}]},{"id": "23","name": "考勤管理","icon": "/xingxing.png","url": "","parentId": "1",'
-				+ '"childs": [{"id": "231","name": "打卡","icon": "","url": "notice/notice.html","parentId": "23",'
-				+ '"childs": []},{"id": "232","name": "查看打卡记录","icon": "","url": "notice/showAddNotice.html","parentId": "23","childs": []}]}]}]';
+				+ '"childs": [{"id": "201","name": "查询申请","icon": "","url": "GetApplyInfo","parentId": "20",'
+				+ '"childs": []},{"id": "202","name": "提交申请","icon": "","url": "apply/addapply.jsp","parentId": "20",'
+
+				+ '"childs": []}]}]}]';
 	}
 
 	// jquery的方法

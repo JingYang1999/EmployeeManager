@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+    pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
 		<title>人事管理系统 ——后台管理</title>
@@ -12,11 +12,11 @@
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3" />
 		<meta http-equiv="description" content="This is my page" />
 		<link href="fkjava.ico" rel="shortcut icon" type="image/x-icon" />
-		<link href="../css/css.css" type="text/css" rel="stylesheet" />
-		<script type="text/javascript" src="../js/jquery-1.11.0.js"></script>
-        <script type="text/javascript" src="../js/jquery-migrate-1.2.1.js"></script>
-		<script type="text/javascript" src="../js/tiny_mce/tiny_mce.js"></script>
-		<script type="text/javascript" src="../js/jquery.form.js"></script>
+		<link href="${pageContext.request.contextPath }/css/css.css" type="text/css" rel="stylesheet" />
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-1.11.0.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-migrate-1.2.1.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/tiny_mce/tiny_mce.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery.form.js"></script>
 		<script type="text/javascript">
 		
 	    $(document).ready(function() {
@@ -43,10 +43,10 @@
 		<table width="100%" border="0" cellpadding="0" cellspacing="0">
 			 <tr><td height="10"></td></tr>
 			 <tr>
-			    <td width="15" height="32"><img src="../images/main_locleft.gif" width="15" height="32"></td>
-				<td class="main_locbg font2"><img src="../images/pointer.gif">&nbsp;&nbsp;&nbsp;当前位置：文档管理  &gt; 修改文档
+			    <td width="15" height="32"><img src="${pageContext.request.contextPath }/images/main_locleft.gif" width="15" height="32"></td>
+				<td class="main_locbg font2"><img src="${pageContext.request.contextPath }/images/pointer.gif">&nbsp;&nbsp;&nbsp;当前位置：文档管理  &gt; 修改文档
 </td>
-				<td width="15" height="32"><img src="../images/main_locright.gif" width="15" height="32"></td>
+				<td width="15" height="32"><img src="${pageContext.request.contextPath }/images/main_locright.gif" width="15" height="32"></td>
 			 </tr>
 		</table>
 	
@@ -54,41 +54,45 @@
 		  	<tr valign="top">
 			    <td>
 			    
-				 
+				  <form action="${pageContext.request.contextPath}/UpdateDocSvl" method="post" enctype="multipart/form-data">
                         <!-- 隐藏表单，flag表示添加标记 -->
     	 			<input type="hidden" name="flag" value="2">
-    	 			<input type="hidden" name="id" value="${document.id }">
+    	 			<input type="hidden" name="id" value="${param.documentid }">
 				  <table width="100%" border="0" cellpadding="0" cellspacing="10" class="main_tab">
                         
 					    <tr><td class="font3 fftd">
 					              
 					                
-					                文档标题：<input type="text" name="title" size="30" id="title" value="文件哈"/></td>
+					                文档标题：<input type="text" name="title" size="30" id="title" value="${param.title }"/></td>
 					    </tr>
 						<tr><td class="main_tdbor"></td></tr>
 						
 						
 						<tr><td class="font3 fftd">文档描述：<br/>
-							<textarea name="remark" cols="88" rows="11" id="content">这是一个文件</textarea>
+							<textarea name="remark" cols="88" rows="11" id="content">${param.remark }</textarea>
 						</td></tr>
 						<tr><td class="main_tdbor"></td></tr>
 						
 							<tr><td class="font3 fftd">文档：<br/>
 							<input type="file" name="file" id="file"  size="30"/>
+
 						</td></tr>
+						
+						<tr><td class="font3 fftd"><input type="hidden" name="filepath" size="30" id="title" value="${param.filepath }"/></td>
+					    </tr>
 						<tr><td class="main_tdbor"></td></tr>
 						
                       
 						
 						<tr><td class="font3 fftd">
-								<input type="button" id="btn" value="确定">
+								<input type="submit" id="btn" value="确定">
 								<input type="reset" value="重置">
 						</td></tr>
 						<tr><td class="main_tdbor"></td></tr>
 					
 
 				  </table>
-				  
+				  </form>
 				</td>
 		  	</tr>
 		</table>
